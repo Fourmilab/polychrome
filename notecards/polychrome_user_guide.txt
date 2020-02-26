@@ -1,0 +1,218 @@
+                        Fourmilab Polychrome
+
+                                 User Guide
+
+Fourmilab Polychrome is a general-purpose and flexible script which may
+installed in the inventory of any object, whether a simple prim, link
+set of multiple prims, or mesh object.  It allows you to specify a set
+of prims and faces (by default all) within the object which smoothly
+change between randomly selected colours specified as a range within
+either the RGB (red-green-blue) or HSV (hue-saturation-value) colour
+spaces.  You can select whether each prim and/or face has its own
+individual colour or all are coloured uniformly.  The script can be
+configured to broadcast colours to scripts installed in other objects
+belonging to the same user in the local region.  This allows “colour
+co-ordinating” different items, for example, a dress, hat, and shoes
+attached to the same avatar, so that all change together identically.
+
+The script can be configured by sending it commands in Local Chat or by
+including a notecard in the object containing the script which uses the
+same commands as in chat.  Although the script is provided with full
+permissions and you're free to modify it as you wish, you can normally
+use the standard script without modifications, configuring it
+appropriately with a notecard in the object where it's installed.
+
+As a script, adding Fourmilab Polychrome to an object has no land
+impact.  The demonstration objects included with the script have the
+land impact of the number of prims of which they are composed.
+
+The following commands may be sent to the script via local chat (by
+default on channel /432, but this may be changed: see “set command”
+below).  All commands and arguments may be abbreviated to as few as two
+characters.
+
+    echo arbitrary text
+        Display the text on the requester's local chat.  This is
+        typically used by scripts to identify themselves and announce
+        operations they perform
+
+    flash face [link]
+        Make the specified face (in a multiple prim link set, that of
+        the designated link) blink to identify itself.  When you're
+        composing a list for the “set exclude” or “set faces” command,
+        use this to make sure you have the correct prim and face
+        numbers.
+
+    help
+        Give the requester this document as a notecard.
+
+    list [flash]
+        List the prims and faces in the object and, if “flash” is
+        specified, make each blink as it is identified.  This makes it
+        easy to identify faces when configuring the script.
+
+    reset
+        Reset the script.  All settings are restored to their defaults.
+
+    run scriptname
+        Run commands from a notecard with the specified name in the
+        inventory of the prim containing this script.  The script
+        contains commands in the same form as those submitted by chat.
+        Blank lines and those which begin with the octothorpe character
+        (“#”) are considered comments and ignored.
+
+    set
+        Set a variety of variables.
+
+        set access owner/group/public
+            Specify who may submit commands via local chat.  By
+            default, only the owner of the object may command it.  You
+            can open this up to members of the owner's group or the
+            general public if you wish.
+
+        set broadcast send/receive/channel n
+            If you wish to co-ordinate colour changes among a number of
+            independent objects, usually (but not always) attached to
+            the same avatar), you can designate a master object which
+            sets colours and broadcasts them to others which receive
+            and follow the same changes rather than choosing their
+            colours independently.  The master object should use “set
+            broadcast send on” and all of those who follow it should
+            use “set broadcast receive on” to receive its messages.
+            Unless you're a super-duper expert who uses “set faces”,
+            you should only use broadcasting when setting a uniform
+            colour for all prims “set poly link off” and faces “set
+            poly face off”. Broadcast messages are sent by default on
+            channel -982449718; you can change this with the “set
+            broadcast channel” command.
+
+        set channel n
+            Sets the channel upon which the script listens for command
+            on local chat.  The channel is reset to the default in the
+            script (432 as supplied) when the script is reset.
+
+        set colour min/max <c1, c2, c3>
+        set colour rgb/hsv
+            Colours are chosen at random within a colour space defined
+            by a minimum and maximum value set by the “min” or “max”
+            parameters.  It's up to you to make sure that each
+            component of the mininum value is less than that of the
+            maximum.  These define corners in a colour space which is
+            defined in either the RGB (red-green-blue) or HSV
+            (hue-saturation-value) system.  Component values are
+            between 0 and 1.  For RGB, they give the intensity of those
+            colours.  For HSV, the H component specifies the hue on a
+            colour wheel with angles measured from 0 to 1.  The HSV
+            system is particularly handy, as it allows you, for
+            example, to easily exclude dark or unsaturated colours if
+            you prefer a more vivid effect.
+
+        set echo on/off
+            Sets whether commands submitted in local chat or from a
+            script are echoed,  When echo is enabled, commands from
+            local chat are prefixed with “>>” and those from scripts
+            with “++”.
+
+        set exclude link face …
+            Specify a list of links and faces which are to excluded
+            from colour changes.  You may, for example, have a dress
+            with a white collar and cuffs that you don't want to change
+            as the colour of the main garment varies.  Name the link
+            and face numbers to be excluded (for an object which has a
+            single link, specify 0 as the link number) and these faces
+            will never be modified.  To identify links and faces, use
+            the “list flash” command.
+
+        set faces link face index …
+            This command is only for Super Geeky Experts™ who have read
+            the source code of the script and understand precisely how
+            it works.  In the hands of masters, however, it can
+            accomplish remarkable things.  This command totally
+            replaces the table of links and faces to be modified which
+            is usually automatically generated.  Each (link face index)
+            triple specifies a face in the object in which the script
+            is installed (you can use “LINK_THIS” or any abbreviation
+            to as few as a single character to designate an object
+            which is a simple prim and “ALL_SIDES” to specify that all
+            sides of an object should be set to the colour).  There is
+            substantial error checking in this command, but if you wish
+            to mess things up with it, you can do so, heroically. On
+            the other hand, with creativity, you can accomplish
+            wonders, such as creating groups of colours which are
+            applied to selected faces and broadcast to other
+            attachments whose colours change synchronised with them.
+
+        set poly face/link on/off
+            Controls whether individual links (“link”) within an object
+            consisting of linked prims are coloured independently and,
+            if so, whether each face (“face”) of those prims are
+            coloured independently.
+
+        set run on/off
+            Controls whether the script updates colours.  By default,
+            it's on, but you may wish to disable updates to correct
+            damage done by unwise configuration.
+
+        set time tick/change t
+            Set the time between fine-grained updates to colour
+            (“tick”) and choice of new colour targets (“change”), both
+            specified in seconds.
+
+    status
+        Show status.  This consists of mostly information of interest
+        to developers.  But the display of the faceList can be copied,
+        edited, and pasted into a “set faces” command to configure for
+        special and creative cases.
+
+Developing Models for Use with Polychrome
+
+Many objects and garments sold on the Second Life Marketplace are
+compatible with and can be transformed into dynamic objects simply by
+adding the Fourmilab Polychrome script.  The script works best in the
+simplest case with designs where indivdual faces are textured white,
+and the texture map only specifies intensity (“value” in the HSV colour
+space).  Many objects come with texture maps which contain colour.
+These work poorly with Polychrome, since the colours it sets for faces
+will interact, usually detrimentally, with the colours from the
+texture.  If you have copy and modify permission for the object, and
+the creator has provided you the texture it uses as a separate object,
+you can save the texture to your local computer and edit it with an
+image editing program such as GIMP or Photoshop, using a colour tool to
+“bleach” the image by setting its colour saturation to zero.  If you
+wish to preserve the original colour of parts of the object, only
+bleach those you wish Polychrome to change, leaving the others in their
+original colours.  When configuring the script use the “set exclude”
+command to exclude the faces you wish to retain their original colours.
+
+Note that having copy and modify permissions on an object do not, by
+themselves, allow you to export its texture(s) for modification.  The
+creator must have supplied the texture image as a separate object with
+that which uses it.  Here are the Second Life Marketplace stores of
+several creators who sell objects that include the texture files that
+allow you to modify them as you wish.
+
+    Meli Imako              https://marketplace.secondlife.com/stores/67299
+    White Canvas Templates  https://marketplace.secondlife.com/stores/141267
+    GeorgeVerde             https://marketplace.secondlife.com/stores/161000
+
+If the object to which you wish to apply Polychrome is a link set
+consisting of multiple prims, the script should be placed in the root
+prim of the set (that with link number of 1).  After installing the
+Polychrome script, you can use the “list” command to obtain the link
+and face number of all of the components of the object, and “list
+flash” to identify them on the visible object.
+
+License
+
+This product (software, documents, images, and models) is
+licensed under a Creative Commons Attribution-ShareAlike 4.0
+International License.
+    http://creativecommons.org/licenses/by-sa/4.0/
+    https://creativecommons.org/licenses/by-sa/4.0/legalcode
+You are free to copy and redistribute this material in any
+medium or format, and to remix, transform, and build upon the
+material for any purpose, including commercially.  You must give
+credit, provide a link to the license, and indicate if changes
+were made.  If you remix, transform, or build upon this
+material, you must distribute your contributions under the same
+license as the original.

@@ -1,0 +1,19 @@
+#
+#       Configure for cube simple prim demo
+#
+
+set run off
+
+set channel 903
+
+set colour RGB
+set colour min <0, 0, 0>
+set colour max <1, 1, 1>
+
+set poly link off
+set poly face on
+
+set time tick 0.25
+set time change 10
+
+set run on

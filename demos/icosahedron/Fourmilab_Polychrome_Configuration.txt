@@ -1,0 +1,19 @@
+#
+#       Configure for icosahedron multi-face demo
+#
+
+set run off
+
+set channel 901
+
+set colour RGB
+set colour min <0, 0, 0>
+set colour max <1, 1, 1>
+
+set poly link on
+set poly face on
+
+set time tick 0.25
+set time change 25
+
+set run on

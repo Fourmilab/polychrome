@@ -1,0 +1,9 @@
+General purpose script, usable with any modifiable object
+
+Colour links and faces independently or all the same
+
+Specify colour range in the RGB or HSV colour system
+
+Communicates with other attachments containing the script to co-ordinate colours
+
+Fully configurable via local chat commands or by a configuration notecard

@@ -1,0 +1,44 @@
+
+                     Fourmilab Polychrome
+                        Development Log
+
+2020 February 24
+
+Created local development Git repository in:
+    ~/w/SecondLife/Polychrome/git
+with:
+    git init
+
+Added:
+    Special files (README.md, etc.)
+    Scripts
+    Logs (this file)
+    Notecards (User Guide / Help file)
+    Tools
+
+Reorganised the marketplace/images/development directory so that
+the raw screen grabs and crops will not clutter up the Git
+repository.  
+   
+Added:
+    Marketplace (listing text, images)
+    
+2020 February 26
+
+Made initial commit of files.
+
+Logged on to github.com.
+
+Created a new repository:
+    polychrome
+with access URLs:
+    HTTPS: https://github.com/Fourmilab/polychrome.git
+    SSH:   git@github.com:Fourmilab/polychrome.git
+
+Pushed the production directory to the repository with:
+    git remote add origin git@github.com:Fourmilab/polychrome.git
+    git push -u origin master
+
+Confirmed that my local "git sync" command works with the remote
+repository.
+
