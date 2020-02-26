@@ -32,5 +32,6 @@ permissions": those who obtain it are free to copy, modify, and
 transfer it to other users within Second Life.
 
 All of this software is licensed under the Creative Commons
-Attribution-ShareAlike license.  Please see LICENSE.md in this
-repository for details.
+Attribution-ShareAlike license.  Please see
+[LICENSE.md](LICENSE.md)
+in this repository for details.
